@@ -25,7 +25,7 @@ public class TokenAspect {
 	
 	@Around("bookControllers()")
 	public Object validToken(ProceedingJoinPoint proceedingJoinPoint)throws Throwable{
-		
+		System.out.println("inside aspect");
 		//get request
 		HttpServletRequest httpServletRequest=((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 				.getRequest();
@@ -35,6 +35,7 @@ public class TokenAspect {
 			//get AuthorizedToken from header of request
 			String token=httpServletRequest.getHeader("AuthorizedToken");
 			
+			System.out.println(token);
 			//check is token valid or not 
 			String tokenData=jwtUtil.isValidTokenWithData(token); 
 			System.out.println("Token data"+tokenData);
@@ -46,20 +47,6 @@ public class TokenAspect {
 		return proceedingJoinPoint.proceed();
 	}
 	
-	@Around("userControllers()")
-	public Object generateToken(ProceedingJoinPoint proceedingJoinPoint)throws Throwable{
-	
-		//get request
-		HttpServletRequest httpServletRequest=((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-			 
-				.getRequest();
-		return proceedingJoinPoint.proceed();
-	}
-	
-	@Pointcut("execution(* com.aish.connectMongoDB.controller.UsersController.*(..))")
-	public void userControllers() {
-		
-	}
 	
 	@Pointcut("execution(* com.aish.connectMongoDB.controller.BookController.*(..))")
 	public void bookControllers() {

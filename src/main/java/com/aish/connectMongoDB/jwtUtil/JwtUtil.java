@@ -39,7 +39,7 @@ public class JwtUtil {
      */
     public String isValidTokenWithData(String token) throws ExpiredJwtException, UnsupportedJwtException,
 	MalformedJwtException, SignatureException, IllegalArgumentException {
-    	String tokenData = Jwts.parser().setSigningKey("tempTokenKey").parseClaimsJws(token).getBody().getSubject();
+    	String tokenData = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
 		return tokenData;
     }
 	

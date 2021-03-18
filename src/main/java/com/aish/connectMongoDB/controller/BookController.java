@@ -34,8 +34,8 @@ public class BookController {
     private UserRepository userRepository;
 
 	@GetMapping("/findAllBooks/{id}")
-	public ResponseEntity<List<Book>> getBooks(@PathVariable String id) {
-		
+	public ResponseEntity<List<Book>> getBooks(@PathVariable("id") String id) {
+		System.out.println(id);
 		//find user by id
 		Users user=this.userRepository.findById(id).get();
 		
